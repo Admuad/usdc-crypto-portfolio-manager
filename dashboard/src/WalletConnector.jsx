@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const WalletConnector = () => {
   const [isConnected, setIsConnected] = useState(false);
+  const [showWalletOptions, setShowWalletOptions] = useState(false);
   const [walletAddress, setWalletAddress] = useState('');
   const [network, setNetwork] = useState('Sepolia Testnet');
   const [balance, setBalance] = useState('0.0');
@@ -18,6 +19,7 @@ const WalletConnector = () => {
   // Mock wallet connection
   const connectWallet = (walletType) => {
     setLoading(true);
+    setShowWalletOptions(false);
     
     // Simulate wallet connection
     setTimeout(() => {
@@ -28,7 +30,7 @@ const WalletConnector = () => {
       setLoading(false);
       
       console.log(`Connected to ${walletType}`);
-    },933);
+    }, 933);
   };
 
   const disconnectWallet = () => {
@@ -36,6 +38,7 @@ const WalletConnector = () => {
     setWalletAddress('');
     setBalance('0.0');
     setNetwork('');
+    setShowWalletOptions(false);
   };
 
   const shortenAddress = (address) => {
@@ -48,6 +51,24 @@ const WalletConnector = () => {
     // Could show toast notification here
     alert('Address copied to clipboard!');
   };
+
+  const toggleWalletOptions = () => {
+    setShowWalletOptions(!showWalletOptions);
+  };
+
+  // Close wallet options when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest('.wallet-connector-wrapper')) {
+        setShowWalletOptions(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     // Check if already connected (from localStorage or similar)
@@ -69,81 +90,98 @@ const WalletConnector = () => {
 
   if (isConnected) {
     return (
-      <div className="wallet-connected">
-        <div className="wallet-info">
-          <div className="wallet-network">
-            <span className="network-indicator connected"></span>
-            <span className="network-text">{network}</span>
+      <div className="wallet-connector-wrapper">
+        <div className="wallet-connected">
+          <div className="wallet-info">
+            <div className="wallet-network">
+              <span className="network-indicator connected"></span>
+              <span className="network-text">{network}</span>
+            </div>
+            <div className="wallet-address" onClick={copyAddress} title="Click to copy">
+              <span className="address-icon">👛</span>
+              <span className="address-text">{shortenAddress(walletAddress)}</span>
+              <span className="copy-hint">📋</span>
+            </div>
+            <div className="wallet-balance">
+              <span className="balance-amount">${balance}</span>
+              <span className="balance-label">USDC</span>
+            </div>
           </div>
-          <div className="wallet-address" onClick={copyAddress} title="Click to copy">
-            <span className="address-icon">👛</span>
-            <span className="address-text">{shortenAddress(walletAddress)}</span>
-            <span className="copy-hint">📋</span>
+          <div className="wallet-actions">
+            <button className="btn btn-small btn-text" onClick={disconnectWallet}>
+              Disconnect
+            </button>
+            <button className="btn btn-small btn-primary">
+              Bridge Funds
+            </button>
           </div>
-          <div className="wallet-balance">
-            <span className="balance-amount">${balance}</span>
-            <span className="balance-label">USDC</span>
-          </div>
-        </div>
-        <div className="wallet-actions">
-          <button className="btn btn-small btn-text" onClick={disconnectWallet}>
-            Disconnect
-          </button>
-          <button className="btn btn-small btn-primary">
-            Bridge Funds
-          </button>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="wallet-connector">
-      <div className="connector-header">
-        <div className="connector-title">
-          <span className="title-icon">🔗</span>
-          <h3>Connect Wallet</h3>
-        </div>
-        <div className="connector-subtitle">
-          Connect your wallet to manage your USDC portfolio
-        </div>
+    <div className="wallet-connector-wrapper">
+      <div className="wallet-connect-button">
+        <button className="btn btn-primary" onClick={toggleWalletOptions}>
+          <span className="button-icon">🔗</span>
+          Connect Wallet
+        </button>
       </div>
 
-      {loading ? (
-        <div className="connecting-overlay">
-          <div className="connecting-spinner"></div>
-          <div className="connecting-text">Connecting to wallet...</div>
-        </div>
-      ) : (
-        <div className="connector-grid">
-          {connectors.map((connector) => (
-            <button
-              key={connector.id}
-              className="connector-card"
-              onClick={() => connectWallet(connector.id)}
-              style={{ '--connector-color': connector.color }}
-            >
-              <div className="connector-icon" style={{ backgroundColor: connector.color }}>
-                {connector.icon}
+      {showWalletOptions && (
+        <div className="wallet-options-modal">
+          <div className="modal-overlay" onClick={() => setShowWalletOptions(false)}></div>
+          <div className="wallet-connector">
+            <div className="connector-header">
+              <div className="connector-title">
+                <span className="title-icon">🔗</span>
+                <h3>Connect Wallet</h3>
+                <button className="close-button" onClick={() => setShowWalletOptions(false)}>×</button>
               </div>
-              <div className="connector-name">{connector.name}</div>
-              <div className="connector-hint">Click to connect</div>
-            </button>
-          ))}
+              <div className="connector-subtitle">
+                Connect your wallet to manage your USDC portfolio
+              </div>
+            </div>
+
+            {loading ? (
+              <div className="connecting-overlay">
+                <div className="connecting-spinner"></div>
+                <div className="connecting-text">Connecting to wallet...</div>
+              </div>
+            ) : (
+              <div className="connector-grid">
+                {connectors.map((connector) => (
+                  <button
+                    key={connector.id}
+                    className="connector-card"
+                    onClick={() => connectWallet(connector.id)}
+                    style={{ '--connector-color': connector.color }}
+                  >
+                    <div className="connector-icon" style={{ backgroundColor: connector.color }}>
+                      {connector.icon}
+                    </div>
+                    <div className="connector-name">{connector.name}</div>
+                    <div className="connector-hint">Click to connect</div>
+                  </button>
+                ))}
+              </div>
+            )}
+
+            <div className="connector-footer">
+              <div className="security-note">
+                <span className="security-icon">🔒</span>
+                <span className="security-text">
+                  Your wallet connection is secure. We never store your private keys.
+                </span>
+              </div>
+              <div className="network-note">
+                Currently connected to Sepolia Testnet. Switch to Mainnet for real funds.
+              </div>
+            </div>
+          </div>
         </div>
       )}
-
-      <div className="connector-footer">
-        <div className="security-note">
-          <span className="security-icon">🔒</span>
-          <span className="security-text">
-            Your wallet connection is secure. We never store your private keys.
-          </span>
-        </div>
-        <div className="network-note">
-          Currently connected to Sepolia Testnet. Switch to Mainnet for real funds.
-        </div>
-      </div>
     </div>
   );
 };
