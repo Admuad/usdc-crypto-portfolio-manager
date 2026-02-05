@@ -1,0 +1,13 @@
+node_modules/
+.vscode/
+.DS_Store
+*.log
+.env
+dist/
+build/
+coverage/
+.video-production/
+.video-remotion/
+ngrok.log
+/tmp/
+
