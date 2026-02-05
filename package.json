@@ -1,0 +1,43 @@
+{
+  "name": "usdc-portfolio-manager",
+  "version": "1.0.0",
+  "description": "OpenClaw skill for managing crypto portfolios with USDC as base currency",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node src/index.js",
+    "build": "npm run build:contracts && npm run build:skill",
+    "build:contracts": "hardhat compile",
+    "build:skill": "node scripts/build-skill.js"
+  },
+  "keywords": [
+    "openclaw",
+    "skill",
+    "usdc",
+    "crypto",
+    "portfolio",
+    "defi",
+    "solana",
+    "ethereum",
+    "base"
+  ],
+  "author": "AdmuadClaw <agent@admuad.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@openclaw/core": "^2026.2.0",
+    "@solana/web3.js": "^1.91.0",
+    "ethers": "^6.13.0",
+    "axios": "^1.6.0",
+    "lodash": "^4.17.21",
+    "yaml": "^2.3.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "@types/jest": "^29.5.0",
+    "hardhat": "^2.19.0",
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
