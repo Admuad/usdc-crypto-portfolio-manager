@@ -165,13 +165,17 @@ npm start
 
 ## 📈 Roadmap
 
-### Phase 1: Hackathon MVP
-- [x] Multi-chain balance checking
-- [x] Portfolio valuation in USD
-- [x] Basic risk alerts
-- [ ] DCA smart contract
-- [ ] Rebalancing execution
-- [ ] Tax reporting
+### 📊 Live Deployment (Sepolia)
+
+| Contract | Address |
+|----------|---------|
+| **MockUSDC** | `0x6aB589D1D6A72060877EFA772CAcCCD8bAE09CEc` |
+| **USDCStreamDCA** | `0x858DE454D50de75cE1791E077Bc25c795D7B61B0` |
+| **PortfolioTracker** | `0x81fFDe8F07139d5B4aC04189FC12c980D4030372` |
+
+## ⚡ Accelerated Features (Phase 2 pulled to Phase 1)
+- **Continuous Yield Harvesting**: Idle USDC automatically deposited into Aave V3.
+- **Risk-Aware Streaming**: Integrated buffer for yield offset.
 
 ### Phase 2: Post-Hackathon
 - DeFi yield optimization

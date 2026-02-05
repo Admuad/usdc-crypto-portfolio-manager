@@ -1,0 +1,21 @@
+{
+  "name": "video-remotion",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@remotion/cli": "^4.0.417",
+    "@remotion/lottie": "^4.0.417",
+    "@remotion/player": "^4.0.417",
+    "@remotion/shapes": "^4.0.417",
+    "@remotion/skia": "^4.0.417",
+    "puppeteer": "^24.36.1",
+    "remotion": "^4.0.417"
+  }
+}

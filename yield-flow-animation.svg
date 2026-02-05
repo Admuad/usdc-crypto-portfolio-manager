@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0`
+500 300" style="background: #0a0b14;">
+  <!-- Background -->
+  <rect width="500" height="300" fill="#0a0b14"/>
+  
+  <!-- Title -->
+  <text x="250" y="40" text-anchor="middle" fill="#f3f1fe" font-family="Inter, sans-serif" font-size="20" font-weight="600">
+    Continuous Yield Harvesting Flow
+  </text>
+  
+  <!-- USDC Wallet -->
+  <rect x="50" y="100" width="80" height="60" rx="8" fill="rgba(89, 37, 230, 0.2)" stroke="#5925e6" stroke-width="2"/>
+  <text x="90" y="125" text-anchor="middle" fill="#f3f1fe" font-family="Inter" font-size="12">USDC Wallet</text>
+  <text x="90" y="145" text-anchor="middle" fill="#7e54f1" font-family="Inter" font-size="14" font-weight="700">$10,000</text>
+  
+  <!-- Arrow to Stream -->
+  <path id="arrow1" d="M135,130 L175,130" stroke="#17854f" stroke-width="3" fill="none" stroke-dasharray="5,5">
+    <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
+  </path>
+  <polygon points="175,130 165,125 165,135" fill="#17854f">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="1s" repeatCount="indefinite"/>
+  </polygon>
+  
+  <!-- Stream DCA -->
+  <rect x="180" y="100" width="140" height="60" rx="8" fill="rgba(126, 84, 241, 0.2)" stroke="#7e54f1" stroke-width="2">
+    <animate attributeName="height" values="60;65;60" dur="2s" repeatCount="indefinite"/>
+  </rect>
+  <text x="250" y="125" text-anchor="middle" fill="#f3f1fe" font-family="Inter" font-size="12">Stream DCA</text>
+  <text x="250" y="145" text-anchor="middle" fill="#7e54f1" font-family="Inter" font-size="14" font-weight="700">$500/day</text>
+  
+  <!-- Yield Arrow to Aave -->
+  <path id="arrow2" d="M250,165 L250,210" stroke="#e79e00" stroke-width="3" fill="none" stroke-dasharray="5,5">
+    <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1.5s" repeatCount="indefinite" begin="0.5s"/>
+  </path>
+  <polygon points="250,210 245,200 255,200" fill="#e79e00">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" repeatCount="indefinite" begin="0.5s"/>
+  </polygon>
+  
+  <!-- Aave V3 -->
+  <rect x="180" y="215" width="140" height="60" rx="8" fill="rgba(231, 158, 0, 0.2)" stroke="#e79e00" stroke-width="2">
+    <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite"/>
+  </rect>
+  <text x="250" y="240" text-anchor="middle" fill="#f3f1fe" font-family="Inter" font-size="12">Aave V3 Yield</text>
+  <text x="250" y="260" text-anchor="middle" fill="#e79e00" font-family="Inter" font-size="14" font-weight="700">12.5% APY</text>
+  
+  <!-- Legend -->
+  <text x="50" y="290" fill="#66767d" font-family="Inter" font-size="11">
+    Animation shows: Continuous DCA execution + Yield harvesting of idle funds = Zero‑cost streaming
+  </text>
+</svg>
