@@ -30,7 +30,13 @@ cp config.example.json config.json
 npm test
 ```
 
-## ✨ Features
+## ✨ Features & Aesthetics
+
+### 🎨 Premium Design System
+- **Bento Grid Layout:** Clean, modular interface for multi-chain data.
+- **Glassmorphic Panels:** Modern, translucent UI elements with background blur.
+- **Dynamic Micro-animations:** Smooth transitions and hover effects for a "living" feel.
+- **Dark Mode Optimized:** Deep midnight palette with electric blue accents.
 
 ### 1. Multi-Chain Portfolio Tracking
 - **Supported Chains:** Ethereum, Base, Polygon, Arbitrum, Avalanche, Solana
